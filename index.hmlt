@@ -1,0 +1,4390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CosmoCenter — Team Observatory Center</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+:root{
+  --blue:#65b8ff;
+  --blue2:#2f82c9;
+  --text:#edf7ff;
+  --muted:#9bb4c9;
+  --panel:#0b1622;
+  --panel2:#101f2d;
+  --border:rgba(101,184,255,.22);
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 10%,rgba(35,120,200,.18),transparent 32%),
+    radial-gradient(circle at 10% 70%,rgba(20,80,140,.08),transparent 30%),
+    linear-gradient(135deg,#020509,#07121e 50%,#020509);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(101,184,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(101,184,255,.025) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 6%;
+  background:rgba(2,7,13,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);
+}
+
+.brand{
+  color:var(--blue);
+  font-size:1.25rem;
+  font-weight:900;
+  letter-spacing:4px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+nav a{
+  color:#b8cee0;
+  text-decoration:none;
+  font-size:.95rem;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:var(--blue);
+}
+
+.hero{
+  min-height:82vh;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  padding:100px 6%;
+  text-align:center;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:620px;
+  height:620px;
+  border-radius:50%;
+  border:1px solid rgba(101,184,255,.1);
+  box-shadow:
+    0 0 100px rgba(50,140,220,.08),
+    inset 0 0 100px rgba(50,140,220,.04);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:120%;
+<style>
+.study-area{
+  display:none;
+  margin-top:55px;
+}
+
+.study-area.active{
+  display:block;
+}
+
+.study-heading{
+  padding:38px;
+  margin-bottom:25px;
+  background:
+    linear-gradient(145deg,
+      rgba(16,31,45,.98),
+      rgba(5,11,17,.98));
+  border:1px solid var(--border);
+}
+
+.study-heading .label{
+  color:var(--blue);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:3px;
+  margin-bottom:12px;
+}
+
+.study-heading h3{
+  font-size:2.3rem;
+  margin-bottom:15px;
+}
+
+.study-heading p{
+  color:var(--muted);
+  max-width:900px;
+  line-height:1.85;
+}
+
+.topic-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.topic-card{
+  width:100%;
+  text-align:left;
+  padding:25px 28px;
+  background:
+    linear-gradient(145deg,
+      rgba(14,28,41,.96),
+      rgba(5,10,16,.98));
+  border:1px solid rgba(101,184,255,.17);
+  color:var(--text);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.topic-card:hover{
+  border-color:var(--blue);
+  transform:translateX(5px);
+}
+
+.topic-card h4{
+  color:#dff1ff;
+  font-size:1.2rem;
+  margin-bottom:9px;
+}
+
+.topic-card .topic-description{
+  color:var(--muted);
+  line-height:1.65;
+}
+
+.topic-card .open-topic{
+  display:block;
+  margin-top:13px;
+  color:var(--blue);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.lesson{
+  display:none;
+  margin-top:12px;
+  padding:35px;
+  background:#07111c;
+  border:1px solid rgba(101,184,255,.16);
+}
+
+.lesson.active{
+  display:block;
+}
+
+.lesson h5{
+  color:var(--blue);
+  font-size:1.45rem;
+  margin:25px 0 12px;
+}
+
+.lesson h5:first-child{
+  margin-top:0;
+}
+
+.lesson p{
+  color:#b4c9da;
+  line-height:1.9;
+  font-size:1rem;
+  margin-bottom:16px;
+}
+
+.lesson ul,
+.lesson ol{
+  color:#b4c9da;
+  line-height:1.9;
+  padding-left:25px;
+  margin-bottom:20px;
+}
+
+.lesson li{
+  margin-bottom:6px;
+}
+
+.lesson .formula{
+  margin:22px 0;
+  padding:20px;
+  background:rgba(101,184,255,.045);
+  border-left:3px solid var(--blue);
+  color:#eaf7ff;
+  font-size:1.15rem;
+  font-family:Georgia,serif;
+}
+
+.lesson .source-box{
+  margin-top:30px;
+  padding:20px;
+  border-top:1px solid rgba(101,184,255,.15);
+  color:#7892a8;
+  line-height:1.7;
+  font-size:.86rem;
+}
+
+.lesson .source-box strong{
+  color:var(--blue);
+}
+
+.lesson .exercise-preview{
+  margin-top:25px;
+  padding:22px;
+  border:1px solid rgba(101,184,255,.16);
+  background:rgba(101,184,255,.025);
+}
+
+.lesson .exercise-preview strong{
+  color:#eaf7ff;
+}
+
+@media(max-width:650px){
+  .study-heading{
+    padding:25px;
+  }
+
+  .study-heading h3{
+    font-size:1.9rem;
+  }
+
+  .lesson{
+    padding:24px;
+  }
+}
+</style>
+
+
+<div class="study-area" id="matematica">
+
+  <div class="study-heading">
+
+    <div class="label">
+      ÁREA DE ESTUDO
+    </div>
+
+    <h3>
+      📐 Matemática
+    </h3>
+
+    <p>
+      A matemática fornece ferramentas para representar
+      quantidades, relações, padrões e estruturas.
+      Ela também é uma das principais linguagens utilizadas
+      pela física e pela astronomia.
+    </p>
+
+  </div>
+
+
+  <div class="topic-list">
+
+
+    <article class="topic-card">
+
+      <h4>
+        1. Álgebra
+      </h4>
+
+      <p class="topic-description">
+        Variáveis, expressões, operações e relações
+        algébricas.
+      </p>
+
+      <span class="open-topic">
+        AULA COMPLETA ↓
+      </span>
+
+      <div class="lesson">
+
+        <h5>
+          O que é álgebra?
+        </h5>
+
+        <p>
+          A álgebra é uma parte da matemática que utiliza
+          símbolos, normalmente letras, para representar
+          números ou quantidades que podem variar. Isso
+          permite escrever relações matemáticas de maneira
+          geral, em vez de trabalhar apenas com números
+          específicos.
+        </p>
+
+        <p>
+          Uma variável pode representar um valor desconhecido
+          ou simplesmente um valor que pode mudar. Por exemplo,
+          em uma expressão como 2x + 5, a letra x representa
+          uma quantidade que ainda pode ser determinada ou
+          que pode assumir diferentes valores.
+        </p>
+
+        <h5>
+          Expressões algébricas
+        </h5>
+
+        <p>
+          Uma expressão algébrica combina números, variáveis
+          e operações matemáticas. Ela não precisa representar
+          uma igualdade. Exemplos incluem x + 4, 3x − 2 e
+          5x² + 7x + 1.
+        </p>
+
+        <p>
+          Os números que aparecem multiplicando as variáveis
+          são chamados de coeficientes. Em 4x, por exemplo,
+          o número 4 é o coeficiente de x.
+        </p>
+
+        <h5>
+          Equações
+        </h5>
+
+        <p>
+          Quando uma expressão é colocada em igualdade com
+          outra, temos uma equação. Resolver uma equação
+          significa encontrar os valores que tornam a igualdade
+          verdadeira.
+        </p>
+
+        <div class="formula">
+          x + 7 = 15
+        </div>
+
+        <p>
+          Para descobrir x, podemos retirar 7 dos dois lados:
+        </p>
+
+        <div class="formula">
+          x + 7 − 7 = 15 − 7
+          <br>
+          x = 8
+        </div>
+
+        <p>
+          A solução pode ser verificada substituindo x por 8
+          na equação original. Temos 8 + 7 = 15, portanto
+          a igualdade é verdadeira.
+        </p>
+
+        <h5>
+          Por que a álgebra é importante?
+        </h5>
+
+        <p>
+          A álgebra aparece em praticamente todas as áreas
+          quantitativas da ciência. Em física, por exemplo,
+          equações podem relacionar força, massa, velocidade,
+          energia e outras grandezas. Em astronomia, relações
+          matemáticas ajudam a calcular órbitas, distâncias,
+          luminosidade e propriedades de estrelas.
+        </p>
+
+        <p>
+          Aprender álgebra também desenvolve a capacidade de
+          transformar um problema escrito em uma representação
+          matemática que pode ser analisada passo a passo.
+        </p>
+
+        <h5>
+          Conceitos importantes
+        </h5>
+
+        <ul>
+          <li>Variável</li>
+          <li>Coeficiente</li>
+          <li>Termo</li>
+          <li>Expressão algébrica</li>
+          <li>Equação</li>
+          <li>Incógnita</li>
+          <li>Solução</li>
+        </ul>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          resolva 2x + 6 = 18.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Álgebra.<br>
+          NASA STEM — Mathematics resources.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>
+        2. Equações
+      </h4>
+
+      <p class="topic-description">
+        Como encontrar valores desconhecidos usando
+        igualdades matemáticas.
+      </p>
+
+      <span class="open-topic">
+        AULA COMPLETA ↓
+      </span>
+
+      <div class="lesson">
+
+        <h5>
+          O que é uma equação?
+        </h5>
+
+        <p>
+          Uma equação é uma afirmação de igualdade entre
+          duas expressões. Normalmente existe uma ou mais
+          incógnitas que precisamos determinar.
+        </p>
+
+        <p>
+          Resolver uma equação significa descobrir quais
+          valores fazem os dois lados da igualdade possuírem
+          exatamente o mesmo valor.
+        </p>
+
+        <div class="formula">
+          3x + 7 = 19
+        </div>
+
+        <h5>
+          Isolando a incógnita
+        </h5>
+
+        <p>
+          Para resolver uma equação, precisamos realizar
+          operações que mantenham a igualdade verdadeira.
+          Podemos adicionar, subtrair, multiplicar ou dividir
+          os dois lados pelo mesmo número, quando permitido.
+        </p>
+
+        <div class="formula">
+          3x + 7 = 19
+          <br>
+          3x = 12
+          <br>
+          x = 4
+        </div>
+
+        <p>
+          Depois de encontrar x = 4, podemos substituir esse
+          valor na equação original. O lado esquerdo será
+          3 · 4 + 7 = 19, confirmando a solução.
+        </p>
+
+        <h5>
+          Equações com números negativos
+        </h5>
+
+        <p>
+          Números negativos seguem as mesmas regras fundamentais.
+          É importante prestar atenção aos sinais durante cada
+          operação e escrever cada etapa para evitar erros.
+        </p>
+
+        <h5>
+          Equações com frações
+        </h5>
+
+        <p>
+          Quando uma incógnita aparece dividida por um número,
+          podemos utilizar a operação inversa para isolá-la.
+        </p>
+
+        <div class="formula">
+          x / 4 = 6
+          <br>
+          x = 24
+        </div>
+
+        <h5>
+          Aplicações
+        </h5>
+
+        <p>
+          Equações podem representar problemas de distância,
+          tempo, velocidade, quantidade, custos, medidas e
+          inúmeras relações científicas.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          resolva 5x − 20 = 40.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Equações.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>
+        3. Funções
+      </h4>
+
+      <p class="topic-description">
+        Relações entre valores de entrada e saída.
+      </p>
+
+      <span class="open-topic">
+        AULA COMPLETA ↓
+      </span>
+
+      <div class="lesson">
+
+        <h5>
+          O conceito de função
+        </h5>
+
+        <p>
+          Uma função estabelece uma relação em que cada entrada
+          permitida está associada a uma saída determinada.
+          Podemos imaginar uma função como uma regra matemática
+          que recebe um valor e produz outro.
+        </p>
+
+        <div class="formula">
+          f(x) = 2x + 1
+        </div>
+
+        <p>
+          Se colocarmos x = 3, substituímos a variável pelo
+          número 3:
+        </p>
+
+        <div class="formula">
+          f(3) = 2 · 3 + 1
+          <br>
+          f(3) = 7
+        </div>
+
+        <h5>
+          Domínio e imagem
+        </h5>
+
+        <p>
+          O domínio representa os valores que podem entrar
+          na função. A imagem representa os valores que podem
+          aparecer como resultado.
+        </p>
+
+        <h5>
+          Funções na ciência
+        </h5>
+
+        <p>
+          Funções são extremamente importantes para descrever
+          fenômenos que mudam. Uma posição pode depender do
+          tempo, a temperatura pode depender da altitude e
+          a luminosidade observada pode depender da distância
+          até uma estrela.
+        </p>
+
+        <p>
+          Em física e astronomia, funções permitem transformar
+          relações entre grandezas em modelos matemáticos que
+          podem ser analisados e comparados com observações.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          para f(x) = 3x − 2, calcule f(5).
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Functions.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+    <article class="topic-card">
+
+      <h4>4. Funções e gráficos</h4>
+
+      <p class="topic-description">
+        Como transformar relações matemáticas em representações visuais.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é um gráfico?</h5>
+
+        <p>
+          Um gráfico é uma representação visual de dados ou de uma
+          relação matemática. Ele permite perceber padrões, mudanças
+          e relações que podem ser mais difíceis de observar apenas
+          olhando para uma lista de números.
+        </p>
+
+        <p>
+          Em um gráfico cartesiano normalmente encontramos dois eixos:
+          o eixo horizontal, chamado eixo x, e o eixo vertical, chamado
+          eixo y. Cada ponto pode representar uma combinação de valores.
+        </p>
+
+        <div class="formula">
+          y = 2x
+        </div>
+
+        <p>
+          Para x = 1, temos y = 2. Para x = 2, temos y = 4.
+          Para x = 3, temos y = 6. Assim podemos construir os pontos
+          (1,2), (2,4) e (3,6).
+        </p>
+
+        <h5>Interpretando uma reta</h5>
+
+        <p>
+          Quando uma função de primeiro grau é representada em um
+          gráfico, normalmente obtemos uma reta. A inclinação dessa
+          reta mostra como uma grandeza varia em relação à outra.
+        </p>
+
+        <p>
+          Se uma reta sobe quando avançamos para a direita, existe
+          uma relação crescente. Se ela desce, existe uma relação
+          decrescente.
+        </p>
+
+        <h5>Gráficos na física</h5>
+
+        <p>
+          Gráficos são fundamentais na física. Podemos representar
+          posição em função do tempo, velocidade em função do tempo,
+          temperatura em função do tempo e muitas outras relações.
+        </p>
+
+        <p>
+          Ao analisar o gráfico de posição de um objeto, por exemplo,
+          podemos descobrir informações sobre seu movimento sem
+          precisar observar diretamente o objeto.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          para y = 3x + 1, encontre y quando x = 4.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Graphing.<br>
+          NASA STEM.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>5. Notação científica</h4>
+
+      <p class="topic-description">
+        Uma forma prática de representar números extremamente grandes
+        ou extremamente pequenos.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Por que usamos notação científica?</h5>
+
+        <p>
+          A ciência trabalha frequentemente com números que possuem
+          muitos algarismos. Distâncias astronômicas, massas de estrelas,
+          tamanhos de partículas e intervalos de tempo podem ser enormes
+          ou extremamente pequenos.
+        </p>
+
+        <p>
+          Escrever todos esses algarismos repetidamente pode ser
+          inconveniente. A notação científica resolve esse problema
+          utilizando potências de dez.
+        </p>
+
+        <div class="formula">
+          300000000 = 3 × 10⁸
+        </div>
+
+        <p>
+          O número 300 milhões pode ser escrito como 3 multiplicado
+          por 10 elevado à oitava potência.
+        </p>
+
+        <div class="formula">
+          0,000004 = 4 × 10⁻⁶
+        </div>
+
+        <p>
+          Quando o número é menor que 1, usamos expoentes negativos.
+          Quanto mais negativo o expoente, menor é a potência de dez.
+        </p>
+
+        <h5>Movendo a vírgula</h5>
+
+        <p>
+          Para transformar um número em notação científica, deslocamos
+          a vírgula até obter um número entre 1 e 10. A quantidade
+          de posições deslocadas determina o expoente.
+        </p>
+
+        <h5>Aplicação na astronomia</h5>
+
+        <p>
+          A notação científica é essencial para astronomia porque
+          muitas distâncias e massas possuem escalas enormes.
+          Ela permite escrever números de maneira compacta sem
+          perder precisão.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          escreva 45.000.000 em notação científica.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Scientific notation.<br>
+          NASA STEM.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>6. Razões e proporções</h4>
+
+      <p class="topic-description">
+        Comparação entre quantidades e relações matemáticas equivalentes.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é uma razão?</h5>
+
+        <p>
+          Uma razão compara duas quantidades. Ela pode ser escrita
+          como uma fração, usando dois pontos ou utilizando uma
+          linguagem matemática equivalente.
+        </p>
+
+        <p>
+          Se uma equipe possui 2 telescópios para cada 3 pessoas,
+          podemos representar essa relação por 2/3.
+        </p>
+
+        <h5>Proporções</h5>
+
+        <p>
+          Uma proporção afirma que duas razões são equivalentes.
+          Isso permite encontrar valores desconhecidos.
+        </p>
+
+        <div class="formula">
+          2/3 = x/12
+        </div>
+
+        <p>
+          Podemos multiplicar em cruz:
+        </p>
+
+        <div class="formula">
+          3x = 24
+          <br>
+          x = 8
+        </div>
+
+        <h5>Escalas</h5>
+
+        <p>
+          Proporções também aparecem em mapas, modelos,
+          desenhos técnicos e representações de objetos.
+          Uma escala informa como uma distância representada
+          se relaciona com uma distância real.
+        </p>
+
+        <h5>Aplicações científicas</h5>
+
+        <p>
+          Relações proporcionais podem aparecer em experiências
+          científicas, conversões de unidades, comparação de
+          grandezas e análise de dados.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          resolva 4/5 = x/20.
+        </div>
+
+        <div class="source-box">
+          <strong>Fonte:</strong><br>
+          Khan Academy — Ratios and proportions.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>7. Trigonometria</h4>
+
+      <p class="topic-description">
+        Relações entre ângulos e lados de triângulos.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Triângulos retângulos</h5>
+
+        <p>
+          A trigonometria estuda relações entre ângulos e lados.
+          Um dos casos mais importantes é o triângulo retângulo,
+          que possui um ângulo de 90 graus.
+        </p>
+
+        <p>
+          Seus lados possuem nomes específicos. O lado oposto ao
+          ângulo de 90 graus é a hipotenusa. Os outros dois são
+          os catetos.
+        </p>
+
+        <h5>Seno, cosseno e tangente</h5>
+
+        <p>
+          As três relações trigonométricas mais conhecidas são
+          seno, cosseno e tangente.
+        </p>
+
+        <div class="formula">
+          sen(θ) = cateto oposto / hipotenusa
+          <br><br>
+          cos(θ) = cateto adjacente / hipotenusa
+          <br><br>
+          tan(θ) = cateto oposto / cateto adjacente
+        </div>
+
+        <p>
+          Essas relações permitem descobrir lados desconhecidos
+          quando conhecemos determinados ângulos e medidas.
+        </p>
+
+        <h5>Exemplo</h5>
+
+        <p>
+          Sabendo que sen(30°) = 0,5 e que a hipotenusa possui
+          comprimento 10, podemos determinar o cateto oposto:
+        </p>
+
+        <div class="formula">
+          cateto = 0,5 × 10
+          <br>
+          cateto = 5
+        </div>
+
+        <h5>Aplicações</h5>
+
+        <p>
+          A trigonometria aparece em física, engenharia,
+          astronomia, navegação, construção e análise de ondas.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          se sen(30°) = 0,5 e a hipotenusa mede 20,
+          qual é o cateto oposto?
+        </div>
+
+        <div class="source-box">
+          <strong>Fonte:</strong><br>
+          Khan Academy — Trigonometry.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>8. Geometria</h4>
+
+      <p class="topic-description">
+        Formas, áreas, volumes, distâncias e relações espaciais.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O estudo das formas</h5>
+
+        <p>
+          A geometria investiga propriedades de figuras e objetos,
+          incluindo comprimentos, ângulos, áreas e volumes.
+        </p>
+
+        <p>
+          Ela é utilizada para descrever desde objetos simples
+          até estruturas muito maiores, como órbitas e modelos
+          espaciais.
+        </p>
+
+        <h5>Área de um círculo</h5>
+
+        <div class="formula">
+          A = πr²
+        </div>
+
+        <p>
+          Se o raio de um círculo é 3, sua área será:
+        </p>
+
+        <div class="formula">
+          A = π × 3²
+          <br>
+          A = 9π
+          <br>
+          A ≈ 28,27
+        </div>
+
+        <h5>Volume de uma esfera</h5>
+
+        <div class="formula">
+          V = 4/3 πr³
+        </div>
+
+        <p>
+          A fórmula permite determinar quanto espaço existe
+          dentro de uma esfera. Esse tipo de cálculo pode ser
+          utilizado em modelos de planetas e outros corpos.
+        </p>
+
+        <h5>Geometria e astronomia</h5>
+
+        <p>
+          Medidas geométricas aparecem em cálculos envolvendo
+          planetas, estrelas, telescópios, órbitas e distâncias.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          calcule a área de um círculo com raio 5.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Geometry.<br>
+          NASA STEM.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>9. Cálculo</h4>
+
+      <p class="topic-description">
+        Derivadas, integrais e estudo matemático das mudanças.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Por que existe o cálculo?</h5>
+
+        <p>
+          Muitas situações científicas envolvem coisas que mudam.
+          A posição de um objeto muda com o tempo, a velocidade
+          pode variar e quantidades podem se acumular.
+        </p>
+
+        <p>
+          O cálculo fornece ferramentas para estudar essas mudanças
+          de maneira precisa.
+        </p>
+
+        <h5>Derivadas</h5>
+
+        <p>
+          Uma derivada mede uma taxa de variação. Em uma situação
+          física, ela pode representar a velocidade quando derivamos
+          a posição em relação ao tempo.
+        </p>
+
+        <div class="formula">
+          x(t) = t²
+          <br><br>
+          v(t) = 2t
+        </div>
+
+        <p>
+          Para t = 3:
+        </p>
+
+        <div class="formula">
+          v(3) = 6
+        </div>
+
+        <h5>Integrais</h5>
+
+        <p>
+          Integrais podem ser utilizadas para representar
+          acumulações. Por exemplo, podemos obter uma distância
+          a partir de uma velocidade que varia com o tempo.
+        </p>
+
+        <h5>Importância para a física</h5>
+
+        <p>
+          O cálculo é uma das ferramentas matemáticas fundamentais
+          da física. Ele aparece na mecânica, eletromagnetismo,
+          gravitação, física quântica e cosmologia.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          se x(t) = t², qual é a velocidade quando t = 5?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          MIT OpenCourseWare — Calculus.<br>
+          Khan Academy — Calculus.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</div>
+
+
+<div class="study-area" id="fisica">
+
+  <div class="study-heading">
+
+    <div class="label">
+      ÁREA DE ESTUDO
+    </div>
+
+    <h3>
+      ⚛️ Física
+    </h3>
+
+    <p>
+      A física procura descrever os fenômenos da natureza
+      utilizando observações, experimentos, modelos e matemática.
+    </p>
+
+  </div>
+
+
+  <div class="topic-list">
+
+
+    <article class="topic-card">
+
+      <h4>1. Movimento</h4>
+
+      <p class="topic-description">
+        Posição, deslocamento, velocidade e aceleração.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Descrever o movimento</h5>
+
+        <p>
+          Para estudar o movimento de um objeto precisamos
+          escolher uma referência e observar como sua posição
+          muda ao longo do tempo.
+        </p>
+
+        <p>
+          Um objeto pode estar em movimento em relação a uma
+          referência e parado em relação a outra. Por isso,
+          movimento depende do referencial utilizado.
+        </p>
+
+        <h5>Velocidade média</h5>
+
+        <div class="formula">
+          v = Δs / Δt
+        </div>
+
+        <p>
+          A velocidade média relaciona a variação de posição
+          com o intervalo de tempo necessário para essa mudança.
+        </p>
+
+        <p>
+          Se um objeto percorre 100 metros em 20 segundos:
+        </p>
+
+        <div class="formula">
+          v = 100 / 20
+          <br>
+          v = 5 m/s
+        </div>
+
+        <h5>Aceleração</h5>
+
+        <p>
+          A aceleração representa a variação da velocidade.
+          Um objeto pode acelerar aumentando sua velocidade,
+          diminuir sua velocidade ou mudar sua direção.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          um objeto percorre 200 metros em 40 segundos.
+          Qual é sua velocidade média?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          Khan Academy — Motion.<br>
+          NASA STEM.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>2. Leis de Newton</h4>
+
+      <p class="topic-description">
+        As relações fundamentais entre força, massa e movimento.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Primeira lei</h5>
+
+        <p>
+          A primeira lei de Newton é conhecida como princípio
+          da inércia. Ela afirma que um corpo tende a manter
+          seu estado de movimento quando a força resultante
+          sobre ele é nula.
+        </p>
+
+        <h5>Segunda lei</h5>
+
+        <p>
+          A segunda lei relaciona força resultante, massa e
+          aceleração.
+        </p>
+
+        <div class="formula">
+          F = ma
+        </div>
+
+        <p>
+          Quanto maior a força resultante aplicada a uma massa,
+          maior tende a ser sua aceleração. Para a mesma força,
+          uma massa maior produz uma aceleração menor.
+        </p>
+
+        <h5>Terceira lei</h5>
+
+        <p>
+          Quando dois corpos interagem, as forças aparecem
+          em pares. Se um corpo exerce uma força sobre outro,
+          o segundo exerce uma força de mesma intensidade e
+          direção oposta sobre o primeiro.
+        </p>
+
+        <h5>Aplicações</h5>
+
+        <p>
+          As leis de Newton são fundamentais para estudar
+          movimentos de objetos, veículos, máquinas, projéteis,
+          satélites e muitos sistemas astronômicos.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          uma força resultante de 20 N atua sobre uma massa
+          de 5 kg. Qual é a aceleração?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Newton's Laws.<br>
+          Khan Academy — Newton's Laws.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+    <article class="topic-card">
+
+      <h4>3. Gravitação</h4>
+
+      <p class="topic-description">
+        Como massas interagem e por que planetas, estrelas e galáxias permanecem ligados.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>A força gravitacional</h5>
+
+        <p>
+          A gravidade é uma das interações fundamentais da natureza.
+          Qualquer objeto que possua massa exerce atração gravitacional
+          sobre outros objetos que também possuem massa.
+        </p>
+
+        <p>
+          Na vida cotidiana percebemos principalmente a atração da Terra.
+          É essa interação que faz objetos caírem em direção ao solo e
+          mantém pessoas, oceanos e atmosfera ligados ao planeta.
+        </p>
+
+        <h5>Lei da gravitação universal</h5>
+
+        <div class="formula">
+          F = G × (m₁m₂ / r²)
+        </div>
+
+        <p>
+          Nessa equação, F representa a força gravitacional, m₁ e m₂
+          representam as massas dos corpos, r representa a distância
+          entre seus centros e G é a constante gravitacional.
+        </p>
+
+        <p>
+          A equação mostra que massas maiores produzem uma interação
+          gravitacional maior. Ela também mostra que a distância é
+          extremamente importante.
+        </p>
+
+        <h5>A dependência com o quadrado da distância</h5>
+
+        <p>
+          A força gravitacional diminui com o quadrado da distância.
+          Isso significa que, se a distância entre dois corpos dobrar,
+          a força não simplesmente cai pela metade.
+        </p>
+
+        <div class="formula">
+          F ∝ 1/r²
+        </div>
+
+        <p>
+          Se a distância dobrar, a força fica quatro vezes menor.
+          Se a distância triplicar, fica nove vezes menor.
+        </p>
+
+        <h5>Gravidade e órbitas</h5>
+
+        <p>
+          A gravidade é essencial para entender órbitas.
+          Um planeta não está simplesmente "parado" sendo puxado
+          pelo Sol. Ele possui velocidade e está constantemente
+          mudando sua trajetória enquanto a gravidade atua.
+        </p>
+
+        <p>
+          A combinação entre movimento e gravidade permite que
+          planetas, luas e satélites permaneçam em órbita.
+        </p>
+
+        <h5>Gravidade na astronomia</h5>
+
+        <p>
+          A mesma ideia pode ser aplicada a sistemas muito maiores.
+          Estrelas orbitam o centro das galáxias, luas orbitam planetas
+          e estrelas podem orbitar umas às outras em sistemas binários.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          se a distância entre dois corpos aumentar 2 vezes,
+          por qual fator a força gravitacional diminui?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Gravity.<br>
+          OpenStax — University Physics.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>4. Energia</h4>
+
+      <p class="topic-description">
+        Trabalho, energia cinética, energia potencial e conservação.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é energia?</h5>
+
+        <p>
+          Em física, energia é uma grandeza associada à capacidade
+          de produzir transformações. Ela pode aparecer de diversas
+          maneiras e ser transferida entre diferentes sistemas.
+        </p>
+
+        <p>
+          Energia não precisa significar apenas movimento.
+          Um objeto parado pode possuir energia potencial,
+          enquanto uma estrela possui enormes quantidades de
+          energia associadas aos processos que ocorrem em seu interior.
+        </p>
+
+        <h5>Energia cinética</h5>
+
+        <p>
+          A energia cinética está relacionada ao movimento de um corpo.
+        </p>
+
+        <div class="formula">
+          Ec = 1/2 mv²
+        </div>
+
+        <p>
+          A velocidade aparece elevada ao quadrado. Por isso,
+          aumentar a velocidade pode aumentar bastante a energia
+          cinética de um objeto.
+        </p>
+
+        <h5>Energia potencial gravitacional</h5>
+
+        <p>
+          Próximo à superfície da Terra podemos utilizar uma forma
+          simples para representar a energia potencial gravitacional:
+        </p>
+
+        <div class="formula">
+          Ep = mgh
+        </div>
+
+        <p>
+          A energia depende da massa, da gravidade local e da altura.
+        </p>
+
+        <h5>Conservação de energia</h5>
+
+        <p>
+          Um dos princípios mais importantes da física é que a energia
+          não desaparece simplesmente. Ela pode ser transformada
+          ou transferida de uma forma para outra.
+        </p>
+
+        <p>
+          Em uma situação ideal, energia potencial pode transformar-se
+          em energia cinética. Em situações reais, parte da energia
+          pode ser transferida para outras formas, como energia térmica.
+        </p>
+
+        <h5>Energia nas estrelas</h5>
+
+        <p>
+          As estrelas produzem energia por processos de fusão nuclear
+          em seus núcleos. Essa energia pode eventualmente escapar
+          como radiação eletromagnética.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual é a energia cinética de um objeto de 2 kg
+          movendo-se a 3 m/s?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          OpenStax — Physics.<br>
+          NASA — Stars.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>5. Ondas</h4>
+
+      <p class="topic-description">
+        Frequência, comprimento de onda, velocidade e fenômenos ondulatórios.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é uma onda?</h5>
+
+        <p>
+          Uma onda é uma perturbação que se propaga transportando
+          energia. Ondas aparecem em muitos fenômenos naturais.
+        </p>
+
+        <p>
+          O som é uma onda mecânica. A luz é uma onda eletromagnética.
+          Ondas também aparecem na água, em cordas e em diversos
+          sistemas físicos.
+        </p>
+
+        <h5>Comprimento de onda</h5>
+
+        <p>
+          O comprimento de onda é a distância entre pontos equivalentes
+          de ondas consecutivas, como duas cristas.
+        </p>
+
+        <div class="formula">
+          λ
+        </div>
+
+        <h5>Frequência</h5>
+
+        <p>
+          A frequência indica quantas oscilações acontecem por unidade
+          de tempo. Sua unidade no Sistema Internacional é o hertz.
+        </p>
+
+        <div class="formula">
+          f = 1/T
+        </div>
+
+        <p>
+          Quanto menor o período de uma oscilação, maior sua frequência.
+        </p>
+
+        <h5>Velocidade de uma onda</h5>
+
+        <div class="formula">
+          v = λf
+        </div>
+
+        <p>
+          Essa relação conecta velocidade, comprimento de onda e
+          frequência.
+        </p>
+
+        <h5>Ondas eletromagnéticas</h5>
+
+        <p>
+          A luz visível faz parte do espectro eletromagnético.
+          Também existem ondas de rádio, micro-ondas, infravermelho,
+          ultravioleta, raios X e raios gama.
+        </p>
+
+        <p>
+          Astrônomos utilizam diferentes regiões do espectro para
+          estudar objetos que seriam invisíveis utilizando apenas
+          a luz visível.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          uma onda possui frequência de 5 Hz e comprimento
+          de onda de 2 m. Qual é sua velocidade?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Electromagnetic Spectrum.<br>
+          OpenStax — Waves.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>6. Luz e espectro eletromagnético</h4>
+
+      <p class="topic-description">
+        Como a radiação eletromagnética permite observar o universo.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>A luz é mais do que aquilo que enxergamos</h5>
+
+        <p>
+          A luz visível representa apenas uma pequena parte do espectro
+          eletromagnético. Nossos olhos detectam somente uma faixa
+          limitada de frequências.
+        </p>
+
+        <p>
+          Telescópios podem detectar diferentes tipos de radiação,
+          permitindo observar fenômenos que não seriam percebidos
+          apenas com instrumentos ópticos comuns.
+        </p>
+
+        <h5>Do rádio aos raios gama</h5>
+
+        <p>
+          As ondas de rádio possuem comprimentos de onda muito maiores
+          que os da luz visível. Na outra extremidade do espectro,
+          raios gama possuem comprimentos de onda extremamente pequenos
+          e frequências muito altas.
+        </p>
+
+        <p>
+          Cada região do espectro pode revelar informações diferentes
+          sobre um objeto astronômico.
+        </p>
+
+        <h5>Espectroscopia</h5>
+
+        <p>
+          Quando a luz de uma estrela é analisada, podemos observar
+          padrões associados a determinados elementos químicos.
+          Isso permite estudar a composição das estrelas sem precisar
+          enviar uma sonda até elas.
+        </p>
+
+        <h5>Desvio para o vermelho</h5>
+
+        <p>
+          A luz também pode apresentar mudanças em seu comprimento
+          de onda devido ao movimento relativo entre a fonte e o
+          observador ou devido à expansão do universo em determinados
+          contextos cosmológicos.
+        </p>
+
+        <p>
+          Esse tipo de informação é extremamente importante para
+          estudar o movimento e a evolução de objetos distantes.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          cite duas regiões do espectro eletromagnético
+          além da luz visível.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Electromagnetic Spectrum.<br>
+          ESA — Astronomy and light.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+
+
+<div class="study-area" id="astronomia">
+
+  <div class="study-heading">
+
+    <div class="label">
+      ÁREA DE ESTUDO
+    </div>
+
+    <h3>
+      🔭 Astronomia
+    </h3>
+
+    <p>
+      O estudo dos corpos celestes, suas propriedades, movimentos,
+      origens e evolução.
+    </p>
+
+  </div>
+
+
+  <div class="topic-list">
+
+
+    <article class="topic-card">
+
+      <h4>1. O Sistema Solar</h4>
+
+      <p class="topic-description">
+        O Sol, planetas, luas, asteroides, cometas e outros corpos.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Uma pequena região da galáxia</h5>
+
+        <p>
+          O Sistema Solar é o sistema planetário no qual está localizada
+          a Terra. Ele possui o Sol em sua região central e diversos
+          corpos que permanecem gravitacionalmente ligados a ele.
+        </p>
+
+        <p>
+          O Sol concentra praticamente toda a massa do Sistema Solar.
+          Essa grande massa faz com que sua gravidade domine o movimento
+          dos planetas e de muitos outros objetos.
+        </p>
+
+        <h5>Os oito planetas</h5>
+
+        <p>
+          Os planetas do Sistema Solar são Mercúrio, Vênus, Terra,
+          Marte, Júpiter, Saturno, Urano e Netuno.
+        </p>
+
+        <p>
+          Os quatro primeiros são classificados como planetas rochosos.
+          Júpiter e Saturno são gigantes gasosos, enquanto Urano e
+          Netuno são classificados como gigantes de gelo.
+        </p>
+
+        <h5>Planetas rochosos</h5>
+
+        <p>
+          Mercúrio, Vênus, Terra e Marte possuem superfícies sólidas
+          e são compostos principalmente por materiais rochosos e
+          metálicos.
+        </p>
+
+        <h5>Gigantes do Sistema Solar</h5>
+
+        <p>
+          Júpiter é o maior planeta do Sistema Solar. Saturno é conhecido
+          principalmente por seu sistema de anéis, formado por inúmeras
+          partículas de gelo e material rochoso.
+        </p>
+
+        <p>
+          Urano e Netuno possuem grandes quantidades de materiais
+          chamados de "gelos" na linguagem da ciência planetária,
+          como água, amônia e metano em diferentes estados e condições.
+        </p>
+
+        <h5>Além dos planetas</h5>
+
+        <p>
+          O Sistema Solar também possui planetas anões, asteroides,
+          cometas, objetos transnetunianos, luas e partículas menores.
+        </p>
+
+        <p>
+          Portanto, imaginar o Sistema Solar como apenas o Sol e oito
+          planetas deixa de fora uma enorme quantidade de objetos.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual é o maior planeta do Sistema Solar?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Solar System Exploration.<br>
+          IAU — Solar System.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>2. O Sol</h4>
+
+      <p class="topic-description">
+        Estrutura, energia, atividade e importância da estrela mais próxima.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Uma estrela comum?</h5>
+
+        <p>
+          O Sol é uma estrela e, apesar de parecer muito diferente
+          das outras estrelas por estar muito mais perto da Terra,
+          ele segue os mesmos princípios físicos básicos.
+        </p>
+
+        <p>
+          Sua proximidade permite que estudemos sua superfície,
+          atmosfera e atividade com muito mais detalhes do que
+          conseguimos observar em estrelas distantes.
+        </p>
+
+        <h5>Fusão nuclear</h5>
+
+        <p>
+          No núcleo solar, temperaturas e pressões extremamente altas
+          permitem que núcleos de hidrogênio participem de processos
+          de fusão nuclear.
+        </p>
+
+        <p>
+          Nesses processos, parte da massa envolvida é convertida
+          em energia. Essa energia é transportada pelo interior solar
+          antes de finalmente escapar como radiação.
+        </p>
+
+        <h5>Camadas do Sol</h5>
+
+        <p>
+          O Sol possui diferentes regiões. Entre elas estão o núcleo,
+          a zona radiativa, a zona convectiva, a fotosfera,
+          a cromosfera e a coroa.
+        </p>
+
+        <h5>Atividade solar</h5>
+
+        <p>
+          O Sol apresenta manchas solares, explosões e ejeções
+          de material. Essas atividades podem afetar o ambiente
+          espacial próximo à Terra.
+        </p>
+
+        <p>
+          O estudo do Sol também ajuda os cientistas a compreender
+          outras estrelas, porque é a estrela que conseguimos observar
+          com maior detalhe.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual processo produz a maior parte da energia
+          liberada pelo Sol?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Sun.<br>
+          ESA — Solar physics.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+    <article class="topic-card">
+
+      <h4>3. Estrelas</h4>
+
+      <p class="topic-description">
+        Nascimento, estrutura, evolução e morte das estrelas.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é uma estrela?</h5>
+
+        <p>
+          Uma estrela é uma enorme esfera de plasma mantida unida
+          principalmente pela gravidade. Em seu interior acontecem
+          processos físicos extremamente energéticos.
+        </p>
+
+        <p>
+          A luz que observamos de uma estrela contém informações
+          sobre sua temperatura, composição, movimento e estado físico.
+        </p>
+
+        <h5>Nascimento estelar</h5>
+
+        <p>
+          Muitas estrelas se formam em regiões densas de nuvens
+          interestelares compostas principalmente por gás e poeira.
+        </p>
+
+        <p>
+          Quando uma região suficientemente densa sofre colapso
+          gravitacional, o material começa a se concentrar.
+          A gravidade transforma energia potencial em outras formas
+          de energia e a região central fica cada vez mais quente.
+        </p>
+
+        <h5>Equilíbrio dentro da estrela</h5>
+
+        <p>
+          Durante grande parte da vida de uma estrela, existe uma
+          competição entre a gravidade, que tende a comprimir o
+          material, e a pressão produzida pelo gás e pelos processos
+          energéticos internos.
+        </p>
+
+        <p>
+          Esse equilíbrio é importante para manter a estrela estável
+          durante determinadas fases de sua evolução.
+        </p>
+
+        <h5>Massa determina muita coisa</h5>
+
+        <p>
+          A massa inicial de uma estrela influencia fortemente
+          sua temperatura, luminosidade, tempo de vida e destino final.
+        </p>
+
+        <p>
+          Estrelas muito massivas conseguem atingir temperaturas
+          extremamente altas em seus interiores e consomem seu
+          combustível nuclear em taxas muito maiores.
+        </p>
+
+        <h5>Morte das estrelas</h5>
+
+        <p>
+          Estrelas não permanecem iguais para sempre. Conforme
+          diferentes combustíveis nucleares são consumidos,
+          sua estrutura muda.
+        </p>
+
+        <p>
+          Estrelas de diferentes massas podem terminar suas vidas
+          como anãs brancas, estrelas de nêutrons ou, em determinados
+          casos, deixar um buraco negro.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          cite dois fatores que influenciam a evolução de uma estrela.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Stars.<br>
+          ESA — Stellar evolution.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>4. Buracos negros</h4>
+
+      <p class="topic-description">
+        Regiões do espaço-tempo onde a gravidade produz efeitos extremos.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é um buraco negro?</h5>
+
+        <p>
+          Um buraco negro é uma região do espaço-tempo cuja gravidade
+          é tão intensa que, dentro de uma determinada fronteira,
+          nem mesmo a luz consegue escapar para um observador distante.
+        </p>
+
+        <p>
+          Isso não significa que seja simplesmente um objeto
+          "sugando tudo". A descrição correta depende da geometria
+          do espaço-tempo e das condições do sistema.
+        </p>
+
+        <h5>Horizonte de eventos</h5>
+
+        <p>
+          O horizonte de eventos é uma fronteira associada ao buraco
+          negro. Para um observador externo, atravessar essa fronteira
+          possui consequências fundamentais para o que pode enviar
+          sinais de volta ao exterior.
+        </p>
+
+        <h5>Como podem se formar?</h5>
+
+        <p>
+          Buracos negros de origem estelar podem surgir quando uma
+          estrela suficientemente massiva chega ao fim de sua evolução
+          e seu núcleo sofre um colapso gravitacional extremo.
+        </p>
+
+        <p>
+          Existem também buracos negros supermassivos, encontrados
+          nos centros de muitas galáxias. Eles podem possuir massas
+          milhões ou bilhões de vezes maiores que a massa do Sol.
+        </p>
+
+        <h5>Buraco negro não é invisível em todos os sentidos</h5>
+
+        <p>
+          Embora um buraco negro isolado não emita luz da mesma forma
+          que uma estrela, sua influência sobre o ambiente pode ser
+          observada.
+        </p>
+
+        <p>
+          Gás aquecido ao redor de um buraco negro pode emitir radiação.
+          Estrelas próximas também podem apresentar movimentos que
+          revelam a presença de um objeto extremamente massivo.
+        </p>
+
+        <h5>Ondas gravitacionais</h5>
+
+        <p>
+          A colisão de objetos compactos, incluindo buracos negros,
+          pode produzir ondas gravitacionais. Essas perturbações
+          propagam-se pelo espaço-tempo e podem ser detectadas
+          por instrumentos extremamente sensíveis.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual é o nome da fronteira associada à região
+          da qual a luz não consegue retornar?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Black Holes.<br>
+          LIGO — Gravitational Waves.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>5. Galáxias</h4>
+
+      <p class="topic-description">
+        Grandes sistemas de estrelas, gás, poeira, matéria escura e outros componentes.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é uma galáxia?</h5>
+
+        <p>
+          Uma galáxia é um sistema gravitacional gigantesco que pode
+          conter estrelas, sistemas planetários, gás, poeira e uma
+          grande quantidade de matéria escura.
+        </p>
+
+        <p>
+          As galáxias podem apresentar diferentes formas e tamanhos.
+          Algumas possuem estruturas espirais bem definidas, enquanto
+          outras possuem aparência elíptica ou irregular.
+        </p>
+
+        <h5>A Via Láctea</h5>
+
+        <p>
+          A Terra está localizada na Via Láctea, uma galáxia espiral.
+          O Sistema Solar encontra-se em uma região do disco galáctico,
+          distante do centro.
+        </p>
+
+        <p>
+          Quando observamos uma faixa clara atravessando o céu em
+          regiões suficientemente escuras, podemos perceber parte
+          da estrutura da nossa própria galáxia.
+        </p>
+
+        <h5>Centro galáctico</h5>
+
+        <p>
+          No centro da Via Láctea existe uma região extremamente
+          complexa que contém, entre outras estruturas, o buraco negro
+          supermassivo Sagittarius A*.
+        </p>
+
+        <p>
+          A presença desse objeto pode ser estudada observando
+          os movimentos de estrelas que orbitam a região central.
+        </p>
+
+        <h5>Matéria escura</h5>
+
+        <p>
+          As velocidades de rotação de galáxias e outros efeitos
+          gravitacionais indicam que existe muito mais massa presente
+          do que aquela explicada pela matéria luminosa observada.
+        </p>
+
+        <p>
+          A hipótese de matéria escura é utilizada para explicar
+          grande parte desses efeitos. Sua natureza ainda é uma
+          questão aberta da física.
+        </p>
+
+        <h5>Colisões galácticas</h5>
+
+        <p>
+          Galáxias podem interagir gravitacionalmente e até passar
+          por processos de fusão. Apesar do nome "colisão", as
+          estrelas individuais estão geralmente separadas por
+          distâncias enormes.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          em qual galáxia está localizado o Sistema Solar?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Galaxies.<br>
+          ESA — Milky Way.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>6. Nebulosas</h4>
+
+      <p class="topic-description">
+        Nuvens interestelares onde estrelas podem nascer ou deixar material.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é uma nebulosa?</h5>
+
+        <p>
+          Nebulosas são regiões do espaço constituídas por gás,
+          poeira ou ambos. Elas podem apresentar diferentes origens,
+          estruturas e características.
+        </p>
+
+        <p>
+          Algumas nebulosas estão associadas ao nascimento de estrelas.
+          Outras são formadas pelo material liberado por estrelas
+          durante determinadas fases de sua evolução.
+        </p>
+
+        <h5>Nebulosas de emissão</h5>
+
+        <p>
+          Em algumas regiões, o gás é energizado pela radiação de
+          estrelas próximas e passa a emitir luz em determinadas
+          frequências.
+        </p>
+
+        <h5>Nebulosas de reflexão</h5>
+
+        <p>
+          Algumas nuvens não produzem a maior parte da luz que vemos.
+          Elas podem espalhar a luz proveniente de estrelas próximas,
+          criando regiões brilhantes.
+        </p>
+
+        <h5>Nebulosas escuras</h5>
+
+        <p>
+          Poeira interestelar pode bloquear parte da luz proveniente
+          de regiões localizadas atrás da nuvem. Essas áreas aparecem
+          como regiões escuras quando observadas em determinados
+          comprimentos de onda.
+        </p>
+
+        <h5>Berçários estelares</h5>
+
+        <p>
+          Regiões densas de algumas nebulosas podem entrar em colapso
+          gravitacional e formar novas estrelas. Por isso, estudar
+          nebulosas também significa estudar a origem de sistemas
+          estelares.
+        </p>
+
+        <p>
+          Observações em infravermelho são especialmente úteis para
+          estudar regiões onde a poeira dificulta a observação em
+          luz visível.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          por que observações em infravermelho podem ajudar
+          a estudar regiões cobertas por poeira?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Nebulae.<br>
+          ESA/Hubble — Nebulae.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>7. Exoplanetas</h4>
+
+      <p class="topic-description">
+        Planetas que orbitam estrelas além do Sistema Solar.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Planetas além do Sol</h5>
+
+        <p>
+          Exoplanetas são planetas que orbitam estrelas diferentes
+          do Sol. Durante muito tempo, sua existência foi apenas
+          uma hipótese científica.
+        </p>
+
+        <p>
+          Atualmente conhecemos milhares de exoplanetas confirmados,
+          mostrando que sistemas planetários são muito mais comuns
+          do que se imaginava.
+        </p>
+
+        <h5>Método do trânsito</h5>
+
+        <p>
+          Um dos métodos utilizados para encontrar exoplanetas é
+          observar pequenas quedas no brilho de uma estrela quando
+          um planeta passa diante dela.
+        </p>
+
+        <p>
+          Se o evento se repete regularmente, os astrônomos podem
+          obter informações sobre o período orbital do planeta.
+        </p>
+
+        <h5>Método da velocidade radial</h5>
+
+        <p>
+          Um planeta também exerce uma pequena atração gravitacional
+          sobre sua estrela. Isso pode fazer a estrela apresentar
+          pequenas mudanças em seu movimento em torno do centro
+          de massa do sistema.
+        </p>
+
+        <p>
+          Essas mudanças podem ser detectadas por meio de observações
+          precisas da luz da estrela.
+        </p>
+
+        <h5>Atmosferas</h5>
+
+        <p>
+          Em alguns casos, a luz que atravessa ou é afetada pela
+          atmosfera de um exoplaneta pode fornecer informações
+          sobre sua composição.
+        </p>
+
+        <p>
+          A busca por mundos habitáveis não significa encontrar
+          automaticamente vida. Habitabilidade e existência de vida
+          são questões diferentes e precisam ser investigadas
+          separadamente.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual método pode detectar uma pequena queda no brilho
+          de uma estrela causada pela passagem de um planeta?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA Exoplanet Exploration.<br>
+          ESA — Exoplanets.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>8. Distâncias astronômicas</h4>
+
+      <p class="topic-description">
+        Como medir e representar distâncias gigantescas no universo.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Por que quilômetros não bastam?</h5>
+
+        <p>
+          Quilômetros são úteis para distâncias terrestres e planetárias,
+          mas tornam-se pouco práticos quando começamos a falar
+          sobre estrelas e galáxias.
+        </p>
+
+        <p>
+          Por isso, astronomia utiliza unidades especiais que tornam
+          essas distâncias mais fáceis de representar.
+        </p>
+
+        <h5>Unidade astronômica</h5>
+
+        <p>
+          A unidade astronômica, representada por UA, é baseada na
+          escala média da distância entre a Terra e o Sol.
+        </p>
+
+        <p>
+          Ela é muito útil para comparar distâncias dentro do
+          Sistema Solar.
+        </p>
+
+        <h5>Ano-luz</h5>
+
+        <p>
+          Um ano-luz é uma unidade de distância. Ele corresponde
+          à distância percorrida pela luz durante um ano no vácuo.
+        </p>
+
+        <p>
+          Portanto, dizer que uma estrela está a 10 anos-luz
+          significa que a luz observada hoje passou aproximadamente
+          10 anos viajando até chegar até nós.
+        </p>
+
+        <h5>Paralaxe</h5>
+
+        <p>
+          A paralaxe é uma técnica utilizada para medir distâncias
+          de estrelas relativamente próximas. Ela utiliza a mudança
+          aparente da posição de uma estrela quando observada de
+          diferentes posições da órbita terrestre.
+        </p>
+
+        <h5>Distâncias ainda maiores</h5>
+
+        <p>
+          Para objetos muito distantes, astrônomos utilizam diferentes
+          métodos e indicadores de distância. Cada técnica funciona
+          melhor em determinadas escalas.
+        </p>
+
+        <p>
+          Construir uma "escada de distâncias cósmicas" é fundamental
+          para descobrir o tamanho e a evolução do universo.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          um ano-luz é uma unidade de tempo ou de distância?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Cosmic Distance Ladder.<br>
+          ESA — Measuring the Universe.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+    <article class="topic-card">
+
+      <h4>9. A Via Láctea</h4>
+
+      <p class="topic-description">
+        Estrutura, braços espirais, centro galáctico e nossa posição na galáxia.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Onde estamos?</h5>
+
+        <p>
+          O Sistema Solar está localizado dentro da Via Láctea,
+          uma galáxia espiral com uma estrutura extremamente grande
+          e complexa.
+        </p>
+
+        <p>
+          Nós não observamos a Via Láctea de fora. Estamos dentro
+          dela, por isso reconstruir sua estrutura exige combinar
+          diferentes tipos de observações astronômicas.
+        </p>
+
+        <h5>O disco galáctico</h5>
+
+        <p>
+          Grande parte das estrelas da Via Láctea está distribuída
+          em uma estrutura aproximadamente achatada chamada disco.
+          É nessa região que também encontramos grande quantidade
+          de gás e poeira interestelar.
+        </p>
+
+        <h5>Braços espirais</h5>
+
+        <p>
+          A Via Láctea possui uma estrutura espiral com regiões
+          onde existe maior concentração de estrelas e gás.
+        </p>
+
+        <p>
+          O Sistema Solar está localizado em uma região do disco
+          conhecida como Braço de Órion ou Esporão de Órion,
+          entre estruturas espirais maiores.
+        </p>
+
+        <h5>O bojo galáctico</h5>
+
+        <p>
+          Próximo ao centro existe uma região mais densamente povoada
+          por estrelas chamada bojo galáctico.
+        </p>
+
+        <p>
+          O centro da galáxia também contém uma região extremamente
+          energética e complexa, onde está localizado Sagittarius A*.
+        </p>
+
+        <h5>Halo</h5>
+
+        <p>
+          Ao redor do disco existe uma região extensa chamada halo.
+          Ela contém estrelas antigas, aglomerados globulares e,
+          segundo os modelos atuais, uma enorme quantidade de matéria
+          escura.
+        </p>
+
+        <h5>Movimento da galáxia</h5>
+
+        <p>
+          A Via Láctea não está parada. Suas estrelas orbitam
+          aproximadamente o centro galáctico e a própria galáxia
+          participa dos movimentos do Grupo Local.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          por que é difícil observar diretamente a estrutura
+          completa da Via Láctea?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Milky Way Galaxy.<br>
+          ESA — Gaia Mission.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>10. Aglomerados estelares</h4>
+
+      <p class="topic-description">
+        Grupos de estrelas ligados pela gravidade e importantes para estudar evolução estelar.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que é um aglomerado?</h5>
+
+        <p>
+          Um aglomerado estelar é um conjunto de estrelas que pode
+          possuir uma origem comum e permanecer associado
+          gravitacionalmente durante diferentes períodos.
+        </p>
+
+        <h5>Aglomerados abertos</h5>
+
+        <p>
+          Aglomerados abertos geralmente possuem menos estrelas
+          e apresentam estruturas mais dispersas.
+        </p>
+
+        <p>
+          Muitas estrelas desses aglomerados nasceram aproximadamente
+          na mesma região e em épocas semelhantes.
+        </p>
+
+        <h5>Aglomerados globulares</h5>
+
+        <p>
+          Aglomerados globulares são sistemas muito mais compactos,
+          contendo grandes quantidades de estrelas concentradas
+          em uma estrutura aproximadamente esférica.
+        </p>
+
+        <p>
+          Muitos deles possuem estrelas muito antigas e podem fornecer
+          informações importantes sobre a história da galáxia.
+        </p>
+
+        <h5>Diagramas de estrelas</h5>
+
+        <p>
+          Como estrelas de um mesmo aglomerado estão aproximadamente
+          à mesma distância da Terra, os astrônomos conseguem comparar
+          suas propriedades com maior facilidade.
+        </p>
+
+        <p>
+          Isso torna os aglomerados excelentes laboratórios naturais
+          para estudar como estrelas mudam ao longo de suas vidas.
+        </p>
+
+        <h5>Aplicação científica</h5>
+
+        <p>
+          Ao comparar estrelas de diferentes massas em um mesmo
+          aglomerado, podemos estudar quais estrelas evoluem mais
+          rapidamente e quais permanecem estáveis por mais tempo.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual tipo de aglomerado costuma ser mais compacto:
+          aberto ou globular?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Star Clusters.<br>
+          ESA — Stellar populations.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>11. Aglomerados de galáxias</h4>
+
+      <p class="topic-description">
+        Estruturas gigantescas formadas por várias galáxias interagindo gravitacionalmente.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Estruturas ainda maiores</h5>
+
+        <p>
+          Galáxias não existem completamente isoladas.
+          Elas podem fazer parte de grupos e aglomerados contendo
+          dezenas, centenas ou até milhares de galáxias.
+        </p>
+
+        <h5>Gravidade em escala cósmica</h5>
+
+        <p>
+          A gravidade mantém essas estruturas ligadas.
+          Além das próprias galáxias, existe uma grande quantidade
+          de gás extremamente quente entre elas.
+        </p>
+
+        <p>
+          Esse gás pode emitir radiação em raios X e, por isso,
+          observações nessa faixa do espectro são importantes
+          para estudar aglomerados.
+        </p>
+
+        <h5>Matéria escura</h5>
+
+        <p>
+          A massa observada nas galáxias e no gás não explica
+          completamente os efeitos gravitacionais medidos.
+        </p>
+
+        <p>
+          A matéria escura contribui para a massa total inferida
+          desses sistemas e pode ser estudada também através
+          de efeitos de lente gravitacional.
+        </p>
+
+        <h5>Lentes gravitacionais</h5>
+
+        <p>
+          A gravidade de uma concentração enorme de massa pode
+          alterar a trajetória da luz que passa próxima dela.
+        </p>
+
+        <p>
+          Esse fenômeno pode produzir imagens distorcidas,
+          arcos e outras estruturas observáveis.
+        </p>
+
+        <h5>Por que estudar aglomerados?</h5>
+
+        <p>
+          Aglomerados de galáxias funcionam como laboratórios
+          gigantescos para estudar gravidade, matéria escura,
+          evolução galáctica e estrutura do universo.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          cite uma evidência que pode revelar a presença
+          de massa invisível em um aglomerado.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Galaxy Clusters.<br>
+          ESA — Gravitational Lensing.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>12. O Grupo Local</h4>
+
+      <p class="topic-description">
+        O conjunto de galáxias ao qual pertence a Via Láctea.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Nem todas as galáxias estão isoladas</h5>
+
+        <p>
+          A Via Láctea faz parte de uma estrutura gravitacional
+          chamada Grupo Local.
+        </p>
+
+        <p>
+          O Grupo Local contém a Via Láctea, Andrômeda e muitas
+          outras galáxias menores.
+        </p>
+
+        <h5>Andrômeda</h5>
+
+        <p>
+          A Galáxia de Andrômeda é uma das maiores galáxias
+          do Grupo Local e está relativamente próxima da Via Láctea
+          em escala cosmológica.
+        </p>
+
+        <p>
+          Sua interação gravitacional com a Via Láctea é um dos
+          exemplos mais importantes de dinâmica galáctica para
+          estudar o futuro do nosso ambiente cósmico.
+        </p>
+
+        <h5>Interações gravitacionais</h5>
+
+        <p>
+          As galáxias do Grupo Local exercem influência gravitacional
+          umas sobre as outras.
+        </p>
+
+        <p>
+          Ao longo de bilhões de anos, essas interações podem alterar
+          órbitas, estruturas e trajetórias.
+        </p>
+
+        <h5>Um laboratório cósmico</h5>
+
+        <p>
+          Como as galáxias do Grupo Local estão relativamente próximas,
+          podemos estudá-las com muito mais detalhes do que galáxias
+          extremamente distantes.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual é o nome da grande galáxia espiral que faz parte
+          do Grupo Local junto com a Via Láctea?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Local Group.<br>
+          ESA — Local Group galaxies.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+
+
+<div class="study-area" id="cosmologia">
+
+  <div class="study-heading">
+
+    <div class="label">
+      ÁREA DE ESTUDO
+    </div>
+
+    <h3>
+      🌌 Cosmologia
+    </h3>
+
+    <p>
+      O estudo científico da origem, estrutura, evolução e destino do universo.
+    </p>
+
+  </div>
+
+
+  <div class="topic-list">
+
+
+    <article class="topic-card">
+
+      <h4>1. O universo observável</h4>
+
+      <p class="topic-description">
+        O que conseguimos observar e por que existe um limite para nossa observação.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Universo observável</h5>
+
+        <p>
+          O universo observável é a região do universo da qual a luz
+          ou outras informações puderam chegar até nós desde o início
+          da história cósmica observável.
+        </p>
+
+        <p>
+          Isso não significa necessariamente que o universo inteiro
+          termine nessa região. O universo pode ser muito maior
+          do que aquilo que conseguimos observar.
+        </p>
+
+        <h5>A velocidade da luz</h5>
+
+        <p>
+          A luz possui velocidade finita. Portanto, observar objetos
+          muito distantes significa também observar o passado deles.
+        </p>
+
+        <p>
+          Quando observamos uma galáxia extremamente distante,
+          sua luz pode ter viajado durante bilhões de anos antes
+          de chegar aos nossos instrumentos.
+        </p>
+
+        <h5>Olhar para longe é olhar para trás</h5>
+
+        <p>
+          Essa característica transforma telescópios em instrumentos
+          que também investigam a história do universo.
+        </p>
+
+        <p>
+          Quanto mais distante observamos, mais antiga pode ser
+          a informação recebida.
+        </p>
+
+        <h5>Limites da observação</h5>
+
+        <p>
+          Existe uma região além da qual não conseguimos receber
+          informações atualmente, devido à idade do universo,
+          à expansão do espaço e à velocidade finita da luz.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          por que observar uma galáxia distante significa
+          observar uma versão antiga dela?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Observable Universe.<br>
+          ESA — Cosmology.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>2. Big Bang</h4>
+
+      <p class="topic-description">
+        O modelo científico que descreve a evolução inicial do universo em expansão.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O que o Big Bang significa?</h5>
+
+        <p>
+          O Big Bang não deve ser imaginado simplesmente como uma
+          explosão acontecendo em algum ponto vazio do espaço.
+        </p>
+
+        <p>
+          O modelo descreve um universo que, no passado remoto,
+          estava em um estado extremamente quente e denso e que
+          passou por uma expansão e evolução ao longo do tempo.
+        </p>
+
+        <h5>Expansão do universo</h5>
+
+        <p>
+          Em escalas cosmológicas, observamos que muitas galáxias
+          distantes apresentam um padrão consistente com um universo
+          em expansão.
+        </p>
+
+        <p>
+          A expansão significa que as distâncias entre muitas regiões
+          do espaço aumentam com o tempo.
+        </p>
+
+        <h5>Evidências</h5>
+
+        <p>
+          O modelo do Big Bang é sustentado por diferentes linhas
+          independentes de evidência, incluindo a expansão cósmica,
+          a abundância de elementos leves e a radiação cósmica
+          de fundo em micro-ondas.
+        </p>
+
+        <h5>Não é uma teoria isolada</h5>
+
+        <p>
+          A cosmologia moderna combina observações astronômicas,
+          física de partículas, relatividade geral e modelos
+          matemáticos para estudar a evolução do universo.
+        </p>
+
+        <p>
+          Isso permite comparar previsões teóricas com observações
+          reais e verificar quais modelos conseguem explicar melhor
+          os dados.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          cite duas evidências que apoiam o modelo do Big Bang.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Big Bang and the Universe.<br>
+          ESA — Planck Mission.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>3. Expansão do universo</h4>
+
+      <p class="topic-description">
+        Como o espaço em grandes escalas muda com o passar do tempo.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>O espaço está se expandindo</h5>
+
+        <p>
+          Em cosmologia, a expansão do universo é descrita como
+          uma mudança na escala das distâncias entre regiões
+          suficientemente afastadas umas das outras.
+        </p>
+
+        <p>
+          Não é necessário imaginar que exista um centro espacial
+          especial a partir do qual tudo esteja sendo lançado.
+        </p>
+
+        <h5>Analogia do balão</h5>
+
+        <p>
+          Uma analogia comum é desenhar pontos na superfície
+          de um balão e depois aumentar o balão.
+        </p>
+
+        <p>
+          Os pontos se afastam uns dos outros à medida que a
+          superfície aumenta. A analogia ajuda a visualizar
+          a expansão, embora o universo real tenha uma geometria
+          muito mais complexa.
+        </p>
+
+        <h5>Desvio para o vermelho cosmológico</h5>
+
+        <p>
+          A expansão do espaço pode aumentar o comprimento de onda
+          da luz que viaja através dele em escalas cosmológicas.
+        </p>
+
+        <p>
+          Esse efeito está relacionado ao chamado redshift cosmológico
+          e fornece informações sobre a expansão do universo.
+        </p>
+
+        <h5>O universo continua expandindo?</h5>
+
+        <p>
+          As observações modernas indicam que a expansão cósmica
+          está acelerando em épocas relativamente recentes da
+          história do universo.
+        </p>
+
+        <p>
+          A explicação mais utilizada envolve uma componente chamada
+          energia escura, cuja natureza ainda não é completamente
+          compreendida.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          o redshift cosmológico está relacionado a qual fenômeno
+          em grande escala?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Expanding Universe.<br>
+          ESA — Dark Energy.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+    <article class="topic-card">
+
+      <h4>4. Radiação cósmica de fundo</h4>
+
+      <p class="topic-description">
+        A radiação remanescente de uma fase muito antiga do universo.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Uma mensagem do universo primordial</h5>
+
+        <p>
+          A radiação cósmica de fundo em micro-ondas é uma das
+          evidências mais importantes para o estudo do universo
+          primordial.
+        </p>
+
+        <p>
+          Ela corresponde à radiação que passou a viajar livremente
+          pelo universo quando ele ficou suficientemente frio para
+          que elétrons e núcleos formassem átomos neutros.
+        </p>
+
+        <h5>Por que ela é tão importante?</h5>
+
+        <p>
+          A radiação cósmica de fundo carrega informações sobre
+          as condições do universo quando ele ainda era extremamente
+          jovem em comparação com sua idade atual.
+        </p>
+
+        <p>
+          Pequenas diferenças de temperatura nessa radiação revelam
+          variações de densidade que posteriormente contribuíram
+          para a formação de estruturas cósmicas.
+        </p>
+
+        <h5>Mapa do céu</h5>
+
+        <p>
+          Missões espaciais conseguiram medir essas pequenas variações
+          em diferentes direções do céu.
+        </p>
+
+        <p>
+          Esses mapas permitem testar modelos cosmológicos e estimar
+          propriedades importantes do universo.
+        </p>
+
+        <h5>Planck</h5>
+
+        <p>
+          A missão Planck, da Agência Espacial Europeia, realizou
+          medições extremamente precisas da radiação cósmica de fundo.
+        </p>
+
+        <p>
+          Os dados ajudaram a determinar parâmetros relacionados
+          à composição, idade e geometria do universo observável.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          por que a radiação cósmica de fundo é considerada
+          uma janela para o universo primordial?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          ESA — Planck Mission.<br>
+          NASA — Cosmic Microwave Background.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>5. Matéria escura</h4>
+
+      <p class="topic-description">
+        Uma componente invisível inferida principalmente por seus efeitos gravitacionais.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Por que suspeitamos que ela existe?</h5>
+
+        <p>
+          Quando astrônomos observam o movimento de estrelas e galáxias,
+          encontram efeitos gravitacionais que não parecem ser explicados
+          apenas pela matéria que conseguimos observar diretamente.
+        </p>
+
+        <p>
+          Essa diferença levou ao desenvolvimento da hipótese de uma
+          componente adicional chamada matéria escura.
+        </p>
+
+        <h5>Ela emite luz?</h5>
+
+        <p>
+          Até o momento, a matéria escura não foi observada diretamente
+          através da luz da mesma maneira que estrelas e planetas.
+        </p>
+
+        <p>
+          Sua presença é inferida principalmente por seus efeitos
+          gravitacionais sobre a matéria visível e sobre a trajetória
+          da luz.
+        </p>
+
+        <h5>Curvas de rotação</h5>
+
+        <p>
+          Em muitas galáxias, as velocidades de rotação observadas
+          permanecem altas em regiões onde esperaríamos velocidades
+          menores se apenas a matéria luminosa estivesse presente.
+        </p>
+
+        <p>
+          Esse comportamento é uma das evidências utilizadas nos
+          modelos de matéria escura.
+        </p>
+
+        <h5>Lente gravitacional</h5>
+
+        <p>
+          A matéria escura também pode ser estudada através da
+          deformação da luz causada pela gravidade de grandes
+          concentrações de massa.
+        </p>
+
+        <h5>Um mistério em aberto</h5>
+
+        <p>
+          A existência de efeitos associados à matéria escura é
+          fortemente apoiada por várias observações, mas a natureza
+          fundamental dessa componente continua sendo uma questão
+          aberta da física.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          a matéria escura é detectada principalmente pela luz
+          que ela emite ou pelos efeitos gravitacionais que produz?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Dark Matter.<br>
+          CERN — Dark Matter.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>6. Energia escura</h4>
+
+      <p class="topic-description">
+        Uma componente associada à expansão acelerada do universo.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Uma das maiores perguntas da cosmologia</h5>
+
+        <p>
+          Observações indicam que a expansão do universo está acelerando.
+          Para descrever esse comportamento nos modelos cosmológicos,
+          os cientistas utilizam o conceito de energia escura.
+        </p>
+
+        <p>
+          Apesar do nome, energia escura não significa simplesmente
+          uma forma comum de energia que podemos observar diretamente.
+        </p>
+
+        <h5>O que sabemos?</h5>
+
+        <p>
+          Sabemos que existe um efeito associado à dinâmica da expansão
+          cósmica que não é explicado de maneira simples apenas pela
+          matéria comum e pela matéria escura.
+        </p>
+
+        <p>
+          Esse efeito aparece em diferentes tipos de observações
+          cosmológicas.
+        </p>
+
+        <h5>Constante cosmológica</h5>
+
+        <p>
+          Uma das explicações mais simples é a constante cosmológica,
+          representada frequentemente pela letra grega Λ.
+        </p>
+
+        <div class="formula">
+          Λ
+        </div>
+
+        <p>
+          Nesse modelo, a energia associada ao próprio espaço possui
+          uma densidade aproximadamente constante enquanto o universo
+          se expande.
+        </p>
+
+        <h5>Ainda não sabemos sua verdadeira natureza</h5>
+
+        <p>
+          Energia escura continua sendo uma das maiores questões
+          abertas da cosmologia moderna.
+        </p>
+
+        <p>
+          Novas observações procuram descobrir se o comportamento
+          observado é realmente compatível com uma constante cosmológica
+          ou se existe uma explicação física mais profunda.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual fenômeno cosmológico está diretamente relacionado
+          ao conceito de energia escura?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Dark Energy.<br>
+          ESA — Euclid Mission.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>7. Estrutura em grande escala</h4>
+
+      <p class="topic-description">
+        Filamentos, vazios, grupos e aglomerados que formam a teia cósmica.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>A teia cósmica</h5>
+
+        <p>
+          Quando observamos o universo em escalas extremamente grandes,
+          as galáxias não aparecem distribuídas aleatoriamente.
+        </p>
+
+        <p>
+          Elas formam estruturas que lembram uma enorme rede,
+          frequentemente chamada de teia cósmica.
+        </p>
+
+        <h5>Filamentos</h5>
+
+        <p>
+          Grandes concentrações de galáxias podem estar conectadas
+          por regiões alongadas conhecidas como filamentos.
+        </p>
+
+        <p>
+          Esses filamentos fazem parte da estrutura produzida
+          pela evolução gravitacional da matéria ao longo de bilhões
+          de anos.
+        </p>
+
+        <h5>Vazios cósmicos</h5>
+
+        <p>
+          Entre as regiões mais densas existem enormes áreas
+          com relativamente poucas galáxias, chamadas de vazios.
+        </p>
+
+        <h5>Como essa estrutura surgiu?</h5>
+
+        <p>
+          Pequenas diferenças de densidade no universo primordial
+          cresceram sob a ação da gravidade.
+        </p>
+
+        <p>
+          Regiões ligeiramente mais densas atraíram mais matéria,
+          aumentando progressivamente suas concentrações.
+        </p>
+
+        <h5>Importância</h5>
+
+        <p>
+          Estudar a estrutura em grande escala ajuda a testar modelos
+          sobre matéria escura, energia escura, gravidade e evolução
+          do universo.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          qual força é fundamental para o crescimento das estruturas
+          cósmicas ao longo do tempo?
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          ESA — Euclid.<br>
+          NASA — Large Scale Structure.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="topic-card">
+
+      <h4>8. Destino do universo</h4>
+
+      <p class="topic-description">
+        Diferentes possibilidades para a evolução futura do cosmos.
+      </p>
+
+      <span class="open-topic">AULA COMPLETA ↓</span>
+
+      <div class="lesson">
+
+        <h5>Podemos prever o futuro?</h5>
+
+        <p>
+          A cosmologia tenta determinar como o universo poderá evoluir
+          usando as leis físicas conhecidas e observações do seu estado
+          atual.
+        </p>
+
+        <p>
+          O destino final depende das propriedades da matéria,
+          da energia escura, da geometria do universo e da evolução
+          da expansão cósmica.
+        </p>
+
+        <h5>Morte térmica</h5>
+
+        <p>
+          Um cenário frequentemente discutido é a chamada morte térmica,
+          em que o universo continua expandindo e as diferenças de energia
+          disponíveis para realizar processos diminuem progressivamente.
+        </p>
+
+        <h5>Big Rip</h5>
+
+        <p>
+          Alguns modelos hipotéticos consideram uma forma de energia
+          escura cujo efeito aumentaria com o tempo.
+        </p>
+
+        <p>
+          Em determinadas versões extremas desse cenário, a expansão
+          poderia eventualmente superar forças que mantêm estruturas
+          cada vez menores unidas.
+        </p>
+
+        <h5>Big Crunch</h5>
+
+        <p>
+          Outro cenário histórico é o Big Crunch, no qual a expansão
+          poderia parar e ser seguida por uma contração.
+        </p>
+
+        <p>
+          As observações atuais, porém, não indicam simplesmente que
+          esse cenário seja o destino mais provável.
+        </p>
+
+        <h5>O que realmente sabemos?</h5>
+
+        <p>
+          Modelos cosmológicos são atualizados conforme novas
+          observações são realizadas. Por isso, distinguir entre
+          hipótese, previsão e evidência observacional é fundamental.
+        </p>
+
+        <div class="exercise-preview">
+          <strong>Exercício:</strong>
+          cite um possível cenário para o futuro do universo.
+        </div>
+
+        <div class="source-box">
+          <strong>Fontes:</strong><br>
+          NASA — Fate of the Universe.<br>
+          ESA — Cosmology.<br>
+          Acesso: 16/10/2026.
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</div>
+
+
+<section class="section" id="ferramentas">
+
+  <div class="section-heading">
+
+    <div class="label">
+      COSMOCENTER TOOLS
+    </div>
+
+    <h2>
+      Ferramentas de estudo
+    </h2>
+
+    <p>
+      Um espaço para registrar descobertas, organizar ideias
+      e praticar o conteúdo estudado.
+    </p>
+
+  </div>
+
+
+  <div class="tools-grid">
+
+
+    <div class="tool-card">
+
+      <div class="tool-icon">📓</div>
+
+      <h3>Diário de estudos</h3>
+
+      <p>
+        Registre o que você estudou, descobriu ou percebeu durante
+        sua sessão de estudos.
+      </p>
+
+      <textarea
+        id="studyDiary"
+        class="study-input"
+        placeholder="O que você estudou hoje?"
+        rows="8"></textarea>
+
+      <button
+        class="tool-button"
+        id="saveDiary"
+        type="button">
+        Salvar no diário
+      </button>
+
+      <div
+        id="diaryStatus"
+        class="tool-status">
+      </div>
+
+    </div>
+
+
+    <div class="tool-card">
+
+      <div class="tool-icon">🧠</div>
+
+      <h3>Anotações</h3>
+
+      <p>
+        Guarde ideias, hipóteses, perguntas e conceitos que você
+        queira revisar depois.
+      </p>
+
+      <textarea
+        id="studyNotes"
+        class="study-input"
+        placeholder="Escreva uma ideia ou anotação..."
+        rows="8"></textarea>
+
+      <button
+        class="tool-button"
+        id="saveNotes"
+        type="button">
+        Salvar anotação
+      </button>
+
+      <div
+        id="notesStatus"
+        class="tool-status">
+      </div>
+
+    </div>
+
+
+    <div class="tool-card">
+
+      <div class="tool-icon">🧪</div>
+
+      <h3>Exercícios</h3>
+
+      <p>
+        Resolva questões relacionadas aos assuntos estudados
+        no CosmoCenter.
+      </p>
+
+      <div class="exercise-box">
+
+        <label for="exerciseAnswer">
+          Questão rápida
+        </label>
+
+        <p>
+          Se um objeto percorre 120 metros em 20 segundos,
+          qual é sua velocidade média?
+        </p>
+
+        <input
+          id="exerciseAnswer"
+          class="study-input"
+          type="number"
+          placeholder="Resposta em m/s">
+
+        <button
+          class="tool-button"
+          id="checkExercise"
+          type="button">
+          Verificar resposta
+        </button>
+
+        <div
+          id="exerciseResult"
+          class="tool-status">
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<section class="section" id="sobre">
+
+  <div class="about-panel">
+
+    <div class="label">
+      SOBRE O PROJETO
+    </div>
+
+    <h2>
+      Team Observatory Center São Gonçalo
+    </h2>
+
+    <p>
+      O CosmoCenter foi criado como um ambiente de estudo dedicado
+      à matemática, física, astronomia e cosmologia.
+    </p>
+
+    <p>
+      A proposta é transformar curiosidade em conhecimento,
+      utilizando explicações, exercícios, anotações e investigação
+      científica.
+    </p>
+
+    <p>
+      O projeto também serve como um espaço pessoal para organizar
+      perguntas sobre o universo e acompanhar a evolução dos estudos.
+    </p>
+
+    <div class="contact-box">
+
+      <strong>Contato</strong>
+
+      <span>
+        saogoncaloobservatorycenter@gmail.com
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+     MATÉRIAS
+  ========================= */
+
+  const subjectCards = document.querySelectorAll(".subject-card");
+  const studyAreas = document.querySelectorAll(".study-area");
+
+  subjectCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+      const subject = card.dataset.subject;
+
+      studyAreas.forEach(area => {
+        area.classList.remove("active");
+      });
+
+      const selectedArea = document.getElementById(subject);
+
+      if (selectedArea) {
+        selectedArea.classList.add("active");
+
+        selectedArea.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    });
+
+  });
+
+
+  /* =========================
+     TÓPICOS
+  ========================= */
+
+  const topicCards = document.querySelectorAll(".topic-card");
+
+  topicCards.forEach(card => {
+
+    const title = card.querySelector("h4");
+    const lesson = card.querySelector(".lesson");
+
+    if (!lesson || !title) return;
+
+    title.addEventListener("click", () => {
+
+      card.classList.toggle("open");
+
+      lesson.classList.toggle("active");
+
+    });
+
+  });
+
+
+  /* =========================
+     DIÁRIO
+  ========================= */
+
+  const diary = document.getElementById("studyDiary");
+  const saveDiary = document.getElementById("saveDiary");
+  const diaryStatus = document.getElementById("diaryStatus");
+
+  if (diary) {
+
+    const savedDiary =
+      localStorage.getItem("cosmocenter_diary");
+
+    if (savedDiary) {
+      diary.value = savedDiary;
+    }
+
+  }
+
+  if (saveDiary) {
+
+    saveDiary.addEventListener("click", () => {
+
+      if (!diary.value.trim()) {
+
+        diaryStatus.textContent =
+          "Escreva alguma coisa antes de salvar.";
+
+        return;
+
+      }
+
+      localStorage.setItem(
+        "cosmocenter_diary",
+        diary.value
+      );
+
+      diaryStatus.textContent =
+        "✓ Diário salvo neste dispositivo.";
+
+    });
+
+  }
+
+
+  /* =========================
+     ANOTAÇÕES
+  ========================= */
+
+  const notes = document.getElementById("studyNotes");
+  const saveNotes = document.getElementById("saveNotes");
+  const notesStatus = document.getElementById("notesStatus");
+
+  if (notes) {
+
+    const savedNotes =
+      localStorage.getItem("cosmocenter_notes");
+
+    if (savedNotes) {
+      notes.value = savedNotes;
+    }
+
+  }
+
+  if (saveNotes) {
+
+    saveNotes.addEventListener("click", () => {
+
+      if (!notes.value.trim()) {
+
+        notesStatus.textContent =
+          "Escreva uma anotação antes de salvar.";
+
+        return;
+
+      }
+
+      localStorage.setItem(
+        "cosmocenter_notes",
+        notes.value
+      );
+
+      notesStatus.textContent =
+        "✓ Anotação salva neste dispositivo.";
+
+    });
+
+  }
+
+
+  /* =========================
+     EXERCÍCIO RÁPIDO
+  ========================= */
+
+  const exerciseAnswer =
+    document.getElementById("exerciseAnswer");
+
+  const checkExercise =
+    document.getElementById("checkExercise");
+
+  const exerciseResult =
+    document.getElementById("exerciseResult");
+
+  if (checkExercise) {
+
+    checkExercise.addEventListener("click", () => {
+
+      const answer =
+        Number(exerciseAnswer.value);
+
+      if (!exerciseAnswer.value.trim()) {
+
+        exerciseResult.textContent =
+          "Digite uma resposta.";
+
+        return;
+
+      }
+
+      if (answer === 6) {
+
+        exerciseResult.textContent =
+          "✓ Correto! 120 ÷ 20 = 6 m/s.";
+
+      } else {
+
+        exerciseResult.textContent =
+          "Ainda não. Use v = Δs ÷ Δt.";
+
+      }
+
+    });
+
+  }
+
+
+  /* =========================
+     NAVEGAÇÃO
+  ========================= */
+
+  const navLinks =
+    document.querySelectorAll(".nav-link");
+
+  navLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const target =
+        link.getAttribute("href");
+
+      if (!target || !target.startsWith("#")) {
+        return;
+      }
+
+      const element =
+        document.querySelector(target);
+
+      if (!element) {
+        return;
+      }
+
+      event.preventDefault();
+
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    });
+
+  });
+
+
+  /* =========================
+     BOTÕES DOS TÓPICOS
+  ========================= */
+
+  const openLabels =
+    document.querySelectorAll(".open-topic");
+
+  openLabels.forEach(label => {
+
+    label.addEventListener("click", event => {
+
+      event.stopPropagation();
+
+      const card =
+        label.closest(".topic-card");
+
+      if (!card) return;
+
+      const lesson =
+        card.querySelector(".lesson");
+
+      if (!lesson) return;
+
+      card.classList.toggle("open");
+
+      lesson.classList.toggle("active");
+
+    });
+
+  });
+
+
+  /* =========================
+     ESTADO INICIAL
+  ========================= */
+
+  studyAreas.forEach(area => {
+    area.classList.remove("active");
+  });
+
+
+  /* =========================
+     ANIMAÇÃO DE ENTRADA
+  ========================= */
+
+  const animated =
+    document.querySelectorAll(
+      ".subject-card, .tool-card, .topic-card"
+    );
+
+  animated.forEach((element, index) => {
+
+    element.style.opacity = "0";
+    element.style.transform = "translateY(18px)";
+
+    setTimeout(() => {
+
+      element.style.transition =
+        "opacity .5s ease, transform .5s ease";
+
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+
+    }, 80 * index);
+
+  });
+
+
+  console.log(
+    "CosmoCenter carregado com sucesso."
+  );
+
+});
+
+</script>
+
+
+</body>
+
+</html>
+<style>
+
+.study-area {
+  display: none;
+  width: min(1400px, 92%);
+  margin: 70px auto;
+  scroll-margin-top: 100px;
+}
+
+.study-area.active {
+  display: block;
+  animation: studyIn .45s ease;
+}
+
+@keyframes studyIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   CABEÇALHO DAS MATÉRIAS
+========================= */
+
+.study-heading {
+  margin-bottom: 35px;
+  padding: 35px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(101,184,255,.10),
+      rgba(11,22,34,.92)
+    );
+  box-shadow:
+    0 0 35px rgba(47,130,201,.08);
+}
+
+.study-heading h3 {
+  margin: 8px 0 12px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text);
+}
+
+.study-heading p {
+  max-width: 900px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   LISTA DE TÓPICOS
+========================= */
+
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topic-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,31,45,.96),
+      rgba(7,15,24,.98)
+    );
+  padding: 26px 30px;
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+.topic-card:hover {
+  border-color: rgba(101,184,255,.55);
+  box-shadow:
+    0 0 25px rgba(47,130,201,.12);
+  transform: translateY(-2px);
+}
+
+.topic-card h4 {
+  margin: 0;
+  cursor: pointer;
+  font-size: 1.35rem;
+  color: var(--text);
+}
+
+.topic-description {
+  margin: 9px 0 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.open-topic {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--blue);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.topic-card.open {
+  border-color: rgba(101,184,255,.5);
+}
+
+
+/* =========================
+   AULAS
+========================= */
+
+.lesson {
+  display: none;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(101,184,255,.14);
+}
+
+.lesson.active {
+  display: block;
+  animation: lessonOpen .35s ease;
+}
+
+@keyframes lessonOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lesson h5 {
+  margin: 28px 0 10px;
+  color: var(--blue);
+  font-size: 1.15rem;
+}
+
+.lesson h5:first-child {
+  margin-top: 0;
+}
+
+.lesson p {
+  max-width: 1050px;
+  margin: 0 0 15px;
+  color: #d7e7f3;
+  line-height: 1.85;
+  font-size: 1rem;
+}
+
+.formula {
+  width: fit-content;
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 3px solid var(--blue);
+  border-radius: 10px;
+  background: rgba(101,184,255,.07);
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.exercise-preview {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid rgba(101,184,255,.18);
+  border-radius: 14px;
+  background: rgba(101,184,255,.055);
+  color: #dceeff;
+  line-height: 1.7;
+}
+
+.source-box {
+  margin-top: 25px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(255,255,255,.07);
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: .9rem;
+}
+
+
+/* =========================
+   FERRAMENTAS
+========================= */
+
+.tools-grid {
+  width: min(1400px, 92%);
+  margin: 35px auto 0;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.tool-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,31,45,.95),
+      rgba(7,15,24,.98)
+    );
+}
+
+.tool-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  background: rgba(101,184,255,.1);
+  border: 1px solid rgba(101,184,255,.2);
+  font-size: 1.5rem;
+}
+
+.tool-card h3 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 1.35rem;
+}
+
+.tool-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.study-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 15px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(101,184,255,.2);
+  outline: none;
+  resize: vertical;
+  background: #07111b;
+  color: var(--text);
+  font: inherit;
+}
+
+.study-input:focus {
+  border-color: var(--blue);
+  box-shadow:
+    0 0 0 3px rgba(101,184,255,.08);
+}
+
+.tool-button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 14px;
+  padding: 12px 18px;
+  border: 1px solid rgba(101,184,255,.35);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      135deg,
+      #1d6094,
+      #123f63
+    );
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.tool-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow:
+    0 0 18px rgba(101,184,255,.18);
+}
+
+.tool-status {
+  min-height: 24px;
+  margin-top: 12px;
+  color: var(--blue);
+  font-size: .9rem;
+}
+
+.exercise-box {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.16);
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.exercise-box label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+
+/* =========================
+   SOBRE
+========================= */
+
+.about-panel {
+  width: min(1100px, 100%);
+  margin: auto;
+  padding: 38px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,31,45,.96),
+      rgba(7,15,24,.98)
+    );
+}
+
+.about-panel h2 {
+  margin: 10px 0 18px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text);
+}
+
+.about-panel p {
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 900px;
+}
+
+.contact-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 25px;
+  padding: 18px;
+  border-left: 3px solid var(--blue);
+  background: rgba(101,184,255,.06);
+}
+
+.contact-box strong {
+  color: var(--blue);
+}
+
+.contact-box span {
+  color: var(--text);
+  word-break: break-word;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .study-heading {
+    padding: 25px;
+  }
+
+  .topic-card {
+    padding: 23px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .study-area {
+    width: 94%;
+    margin: 45px auto;
+  }
+
+  .study-heading {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .study-heading h3 {
+    font-size: 2rem;
+  }
+
+  .topic-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .lesson p {
+    font-size: .96rem;
+    line-height: 1.75;
+  }
+
+  .formula {
+    font-size: .92rem;
+    overflow-x: auto;
+  }
+
+  .tools-grid {
+    width: 94%;
+  }
+
+  .tool-card {
+    padding: 22px;
+  }
+
+  .about-panel {
+    padding: 25px;
+  }
+
+}
+
+</style>
